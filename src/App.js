@@ -24,28 +24,47 @@ const JourneyFeature = ({ type, position, href }) => {
 };
 
 const App = () => {
-  const [carPosition, setCarPosition] = useState(-100); // Start hidden above the screen
+  const [carPosition, setCarPosition] = useState(-200); // Start hidden above the screen
+  const [scrollStarted, setScrollStarted] = useState(false); // Track if scrolling has started
+
+  const events = [
+    { type: "gas", position: { top: "800px", left: "calc(50% - 100px)" }, href: "https://example.com" },
+    { type: "bump", position: { top: "1600px", left: "calc(50% + 100px)" }, href: "https://example2.com" },
+    { type: "gas", position: { top: "2400px", left: "calc(50% - 100px)" }, href: "https://example3.com" },
+  ];
+
+  const totalRoadHeight = parseInt(events[events.length - 1].position.top, 10) + 400; // End road slightly past the last event
 
   // Scroll handler to move the car
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const centerThreshold = 200; // Distance where the car locks at the center
-      if (scrollY <= centerThreshold) {
-        setCarPosition(scrollY - 100); // Adjust position as the user scrolls
+      const centerPosition = window.innerHeight / 2 - 30; // Center of the screen minus half car height
+
+      if (!scrollStarted) {
+        setScrollStarted(true); // Start animating when scrolling begins
+      }
+
+      if (scrollY <= centerPosition) {
+        setCarPosition(scrollY - 200); // Adjust position until car reaches center
       } else {
-        setCarPosition(centerThreshold - 100); // Lock the car in the center
+        setCarPosition(centerPosition); // Lock car in center (fixed calculation)
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [scrollStarted]);
 
   return (
-    <div className="road-container">
+    <div
+      className="road-container"
+      style={{
+        height: `${totalRoadHeight}px`, // Dynamic height matching the road and events
+      }}
+    >
       {/* Road */}
-      {Array(20)
+      {Array(Math.ceil(totalRoadHeight / 150))
         .fill(0)
         .map((_, index) => (
           <img
@@ -61,26 +80,16 @@ const App = () => {
       <img
         src="/car.png"
         alt="car"
-        className="car-image"
-        style={{ top: `${carPosition}px` }}
+        className={`car-image ${scrollStarted ? "animate-car" : ""}`}
+        style={{
+          top: `${scrollStarted ? carPosition : -200}px`, // Fix the teleport issue
+        }}
       />
 
       {/* Journey Features */}
-      <JourneyFeature
-        type="gas"
-        position={{ top: "400px", left: "calc(50% - 100px)" }}
-        href="https://example.com"
-      />
-      <JourneyFeature
-        type="bump"
-        position={{ top: "900px", left: "calc(50% + 100px)" }}
-        href="https://example2.com"
-      />
-      <JourneyFeature
-        type="gas"
-        position={{ top: "1400px", left: "calc(50% - 100px)" }}
-        href="https://example3.com"
-      />
+      {events.map((event, index) => (
+        <JourneyFeature key={index} {...event} />
+      ))}
     </div>
   );
 };

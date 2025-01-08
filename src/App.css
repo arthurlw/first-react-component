@@ -7,15 +7,15 @@ body {
 .road-container {
   position: relative;
   width: 100vw;
-  height: 4000px; /* Enough height to allow scrolling */
   background-color: #e5e5e5;
+  overflow: hidden; /* Prevent scrolling beyond content */
 }
 
 .road-image {
   position: absolute;
-  width: 100px; /* Smaller road size */
+  width: 80px; /* Adjusted smaller road size */
   height: auto;
-  left: calc(50% - 50px); /* Center the road */
+  left: calc(50% - 40px); /* Center the road */
 }
 
 .car-image {
@@ -24,7 +24,7 @@ body {
   height: auto;
   left: calc(50% - 30px); /* Center the car horizontally */
   z-index: 10;
-  transition: top 0.2s ease-in-out; /* Smooth transition for the car */
+  transition: top 0.5s ease-in-out; /* Smooth animation to make the car slower */
 }
 
 .journey-feature {
@@ -37,4 +37,18 @@ body {
 .feature-image {
   width: 50px; /* Adjusted size for features */
   height: auto;
+}
+
+/* Animating car to make it come in slower */
+.animate-car {
+  animation: carEntrance 0.7s ease-in-out forwards; /* Add forwards to keep position */
+}
+
+@keyframes carEntrance {
+  0% {
+    top: -100px; /* Start above the screen */
+  }
+  100% {
+    top: calc(50% - 30);
+  }
 }
