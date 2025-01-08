@@ -7,7 +7,10 @@ const JourneyFeature = ({ type, position, href }) => {
   };
 
   return (
-    <div
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
       className="journey-feature"
       style={{
         top: position.top,
@@ -15,10 +18,7 @@ const JourneyFeature = ({ type, position, href }) => {
       }}
     >
       <img src={featureImages[type]} alt={type} className="feature-image" />
-      <a href={href} className="feature-box" target="_blank" rel="noreferrer">
-        {type.toUpperCase()}
-      </a>
-    </div>
+    </a>
   );
 };
 

@@ -1,27 +1,6 @@
 import React, { useEffect, useState } from "react";
+import JourneyFeature from "./components/JourneyFeature";
 import "./App.css";
-
-const JourneyFeature = ({ type, position, href }) => {
-  const featureImages = {
-    gas: "/gas.png",
-    bump: "/bump.png",
-  };
-
-  return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="journey-feature"
-      style={{
-        top: position.top,
-        left: position.left,
-      }}
-    >
-      <img src={featureImages[type]} alt={type} className="feature-image" />
-    </a>
-  );
-};
 
 const App = () => {
   const [carPosition, setCarPosition] = useState(-200); // Start hidden above the screen
