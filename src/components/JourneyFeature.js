@@ -2,18 +2,22 @@ import React from "react";
 
 const JourneyFeature = ({ type, position, href }) => {
   const featureImages = {
-    gas: "/gas-station.png",
+    gas: "/gas.png",
     bump: "/bump.png",
   };
 
   return (
-    <div className="feature" style={{ ...position }}>
+    <div
+      className="journey-feature"
+      style={{
+        top: position.top,
+        left: position.left,
+      }}
+    >
       <img src={featureImages[type]} alt={type} className="feature-image" />
-      <div className="feature-box">
-        <a href={href} target="_blank" rel="noopener noreferrer">
-          Learn more
-        </a>
-      </div>
+      <a href={href} className="feature-box" target="_blank" rel="noreferrer">
+        {type.toUpperCase()}
+      </a>
     </div>
   );
 };
