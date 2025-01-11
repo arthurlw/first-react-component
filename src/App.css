@@ -20,11 +20,11 @@ body {
 
 .car-image {
   position: fixed;
-  width: 60px; /* Smaller car size */
+  width: 70px; /* Smaller car size */
   height: auto;
-  left: calc(50% - 30px); /* Center the car horizontally */
+  left: calc(50% - 35px); /* Center the car horizontally */
   z-index: 10;
-  transition: top 1s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation to make the car slower */
+  transition: top 2s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation to make the car slower */
 }
 
 .journey-feature {
@@ -37,18 +37,4 @@ body {
 .feature-image {
   width: 50px; /* Adjusted size for features */
   height: auto;
-}
-
-/* Animating car to make it come in slower */
-.animate-car {
-  animation: carEntrance 0.7s ease-in-out forwards; /* Add forwards to keep position */
-}
-
-@keyframes carEntrance {
-  0% {
-    top: -100px; /* Start above the screen */
-  }
-  100% {
-    top: calc(50% - 30);
-  }
 }

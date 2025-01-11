@@ -1,0 +1,26 @@
+.road-sign {
+    position: absolute;
+    top: 20px; /* Adjusts the vertical position on the page */
+    left: 20px; /* Adjusts the horizontal position on the page */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent; /* Background set to transparent since the PNG image is used */
+  }
+  
+  .road-sign-image {
+    width: 100%; /* Ensures the image spans the calculated width */
+    height: auto; /* Maintains aspect ratio of the PNG */
+    z-index: 1; /* Ensures the image is behind the title */
+  }
+  
+  .road-sign-title {
+    position: absolute;
+    font-size: 14px; /* Adjusts the font size for readability */
+    font-weight: bold;
+    color: #000; /* Text color to stand out */
+    z-index: 2; /* Places the text above the image */
+    text-align: center;
+    pointer-events: none; /* Prevents the text from interfering with user interactions */
+  }
+  

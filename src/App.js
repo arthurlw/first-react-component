@@ -15,7 +15,7 @@ const App = () => {
 
   // Set the car to the center of the screen immediately on load
   useEffect(() => {
-    const centerPosition = window.innerHeight / 2 - 30; // Center of the screen minus half car height
+    const centerPosition = window.innerHeight / 2 - 80; // Center of the screen minus half car height
     setCarPosition(centerPosition); // Set car position to the center
   }, []); // Empty dependency array ensures this runs only once
 
