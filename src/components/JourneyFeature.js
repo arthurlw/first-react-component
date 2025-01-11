@@ -2,7 +2,7 @@ import React from "react";
 
 const JourneyFeature = ({ type, position, href }) => {
   const featureImages = {
-    gas: "/gas.png",
+    gas: "/gas-station.png",
     bump: "/bump.png",
   };
 

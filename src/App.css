@@ -7,7 +7,7 @@ body {
 .road-container {
   position: relative;
   width: 100vw;
-  background-color: #e5e5e5;
+  background-color: #ffeaa4;
   overflow: hidden; /* Prevent scrolling beyond content */
 }
 
@@ -35,6 +35,6 @@ body {
 }
 
 .feature-image {
-  width: 50px; /* Adjusted size for features */
+  width: 300px; /* Adjusted size for features */
   height: auto;
 }

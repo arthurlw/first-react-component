@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import JourneyFeature from "./components/JourneyFeature";
+import RoadSign from "./components/RoadSign"; // Import the RoadSign component
 import "./App.css";
 
 const App = () => {
   const [carPosition, setCarPosition] = useState(-200); // Start hidden above the screen
 
   const events = [
-    { type: "gas", position: { top: "800px", left: "calc(50% - 100px)" }, href: "https://example.com" },
-    { type: "bump", position: { top: "1600px", left: "calc(50% + 100px)" }, href: "https://example2.com" },
-    { type: "gas", position: { top: "2400px", left: "calc(50% - 100px)" }, href: "https://example3.com" },
+    { type: "gas", position: { top: "800px", left: "calc(50% - 600)" }, href: "https://example.com" },
+    { type: "bump", position: { top: "1600px", left: "calc(50% + 600)" }, href: "https://example2.com" },
+    { type: "gas", position: { top: "2400px", left: "calc(50% - 600)" }, href: "https://example3.com" },
   ];
 
   const totalRoadHeight = parseInt(events[events.length - 1].position.top, 10) + 400; // End road slightly past the last event
@@ -26,6 +27,9 @@ const App = () => {
         height: `${totalRoadHeight}px`, // Dynamic height matching the road and events
       }}
     >
+      {/* Road Sign */}
+      <RoadSign title="Road to 1000 Github Contributions" /> {/* Add a title for the road sign */}
+
       {/* Road */}
       {Array(Math.ceil(totalRoadHeight / 150))
         .fill(0)
