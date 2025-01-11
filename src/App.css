@@ -24,7 +24,7 @@ body {
   height: auto;
   left: calc(50% - 30px); /* Center the car horizontally */
   z-index: 10;
-  transition: top 1s ease-in-out; /* Smooth animation to make the car slower */
+  transition: top 1s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth animation to make the car slower */
 }
 
 .journey-feature {
