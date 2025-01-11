@@ -19,17 +19,6 @@ const App = () => {
     setCarPosition(centerPosition); // Set car position to the center
   }, []); // Empty dependency array ensures this runs only once
 
-  // Scroll handler to lock car position in center
-  useEffect(() => {
-    const handleScroll = () => {
-      const centerPosition = window.innerHeight / 2 - 30; // Center of the screen minus half car height
-      setCarPosition(centerPosition); // Keep car fixed in the center
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div
       className="road-container"
