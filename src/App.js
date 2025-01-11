@@ -4,7 +4,6 @@ import "./App.css";
 
 const App = () => {
   const [carPosition, setCarPosition] = useState(-200); // Start hidden above the screen
-  const [scrollStarted, setScrollStarted] = useState(false); // Track if scrolling has started
 
   const events = [
     { type: "gas", position: { top: "800px", left: "calc(50% - 100px)" }, href: "https://example.com" },
@@ -14,26 +13,22 @@ const App = () => {
 
   const totalRoadHeight = parseInt(events[events.length - 1].position.top, 10) + 400; // End road slightly past the last event
 
-  // Scroll handler to move the car
+  // Set the car to the center of the screen immediately on load
+  useEffect(() => {
+    const centerPosition = window.innerHeight / 2 - 30; // Center of the screen minus half car height
+    setCarPosition(centerPosition); // Set car position to the center
+  }, []); // Empty dependency array ensures this runs only once
+
+  // Scroll handler to lock car position in center
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
       const centerPosition = window.innerHeight / 2 - 30; // Center of the screen minus half car height
-
-      if (!scrollStarted) {
-        setScrollStarted(true); // Start animating when scrolling begins
-      }
-
-      if (scrollY <= centerPosition) {
-        setCarPosition(scrollY - 200); // Adjust position until car reaches center
-      } else {
-        setCarPosition(centerPosition); // Lock car in center (fixed calculation)
-      }
+      setCarPosition(centerPosition); // Keep car fixed in the center
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [scrollStarted]);
+  }, []);
 
   return (
     <div
@@ -59,9 +54,9 @@ const App = () => {
       <img
         src="/car.png"
         alt="car"
-        className={`car-image ${scrollStarted ? "animate-car" : ""}`}
+        className="car-image"
         style={{
-          top: `${scrollStarted ? carPosition : -200}px`, // Fix the teleport issue
+          top: `${carPosition}px`, // Immediate positioning to center
         }}
       />
 
