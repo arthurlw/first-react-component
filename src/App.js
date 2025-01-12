@@ -6,30 +6,35 @@ import "./App.css";
 const App = () => {
   const [carPosition, setCarPosition] = useState(-200); // Start hidden above the screen
 
-  // Configurable values for event generation
+  // List of events with custom hrefs
+  const events = [
+    { type: "gas", href: "https://example.com" },
+    { type: "bump", href: "https://special-event.com" },
+    { type: "gas", href: "https://example2.com" },
+    { type: "bump", href: "https://example3.com" },
+    { type: "gas", href: "https://another-special.com" },
+  ];
+
   const eventConfig = {
-    spacing: 800, // Vertical spacing between events
     initialTop: 800, // Starting top position for the first event
-    horizontalOffset: 600, // Horizontal offset for alternating left and right
+    spacing: 800, // Vertical spacing between events
+    horizontalOffset: 300, // Horizontal offset for alternating left and right
   };
 
-  const generateEvents = (count) => {
-    return Array.from({ length: count }).map((_, index) => {
-      const isLeft = index % 2 === 0; // Alternate between left and right
-      return {
-        type: index % 2 === 0 ? "gas" : "bump", // Alternate event types
-        position: {
-          top: `${eventConfig.initialTop + index * eventConfig.spacing}px`,
-          left: `calc(50% ${isLeft ? "-" : "+"} ${eventConfig.horizontalOffset}px)`,
-        },
-        href: `https://example${index + 1}.com`,
-      };
-    });
-  };
+  // Add dynamic position values to each event
+  const positionedEvents = events.map((event, index) => {
+    const isLeft = index % 2 === 0; // Alternate between left and right
+    return {
+      ...event,
+      position: {
+        top: `${eventConfig.initialTop + index * eventConfig.spacing}px`,
+        left: `calc(50% - 150px ${isLeft ? "-" : "+"} ${eventConfig.horizontalOffset}px)`,
+      },
+    };
+  });
 
-  const events = generateEvents(5); // Change the number of events here
-
-  const totalRoadHeight = parseInt(events[events.length - 1].position.top, 10) + 400; // End road slightly past the last event
+  const totalRoadHeight =
+    parseInt(positionedEvents[positionedEvents.length - 1].position.top, 10) + 400; // End road slightly past the last event
 
   // Set the car to the center of the screen immediately on load
   useEffect(() => {
@@ -71,7 +76,7 @@ const App = () => {
       />
 
       {/* Journey Features */}
-      {events.map((event, index) => (
+      {positionedEvents.map((event, index) => (
         <JourneyFeature key={index} {...event} />
       ))}
     </div>
