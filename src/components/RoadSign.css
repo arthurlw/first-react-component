@@ -10,12 +10,6 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
-.road-sign-image {
-  max-width: 50px; /* Adjust the image size */
-  max-height: 50px; /* Maintain aspect ratio */
-  margin-right: 10px; /* Space between image and text */
-}
-
 .road-sign-title {
   color: white; /* White text for contrast */
   font-size: 1.2rem; /* Adjust font size for readability */
